@@ -1,0 +1,37 @@
+{
+	"menu":
+	{
+		"start":"開始遊戲",	
+		"verson":"1.0.0"
+	},
+	"game":
+	{
+		"HintButton":
+		{
+			"move":"移動",
+			"rotate":"旋轉建築",
+			"stop":"停止放置",
+			"put":"放置建築",
+			"delete":"刪除建築",
+			"backpad":"開啟/關閉背包"
+		
+		},
+		"InvalidWord":
+		{
+			"collide":"此處已有建築物"
+		},
+		"Backpad":
+		{
+			"backpad":"戰利品",
+			"num":"數量"
+		},
+		"Tutorial":
+		{
+			"tutor":"教學",
+			"imform1":"在圓形礦脈上放一個開採機來採\n集圓形"
+		
+		}
+	
+	}
+
+}
