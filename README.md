@@ -36,5 +36,5 @@ Now have:
 ### v1.0.1
 
 1. Fix some bugs:
-	* Belt can show right direction.
+	* Belt can show in the right direction.
 	* New tutorials.
