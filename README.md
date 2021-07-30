@@ -25,3 +25,16 @@ Now have:
 ![image](https://user-images.githubusercontent.com/52538091/127692029-7976716f-6aa0-4a90-8a1c-d389811f0fcb.png)
 
 ![image](https://user-images.githubusercontent.com/52538091/127692056-8851a03b-023b-419a-8ae4-62b63dd9c47d.png)
+
+
+## Update log
+
+### v1.0.0
+
+1. Release basic game
+
+### v1.0.1
+
+1. Fix some bugs:
+	* Belt can show right direction.
+	* New tutorials.
