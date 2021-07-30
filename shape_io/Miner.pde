@@ -15,6 +15,7 @@ class Miner extends Building {
   ArrayList<ShapeItem> shapeItemsBackpad;
   Time mineTime;
   ShapeItemTransport shapeItemTransport;
+  boolean tutorial1=false;
   
   Miner() {
     super();
@@ -58,6 +59,10 @@ class Miner extends Building {
       if(c.tag.equals("Mine")){
         Mine m=c.getMine();
         if(m.transform.getPosition().equal(transform.getPosition())){
+          if(!tutorial1){
+            tutorial1=true;
+            game.tutorialManager.addNewTutorial();
+          }
           mine=m;
         }
       }

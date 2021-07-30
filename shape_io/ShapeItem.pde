@@ -48,14 +48,14 @@ class ShapeItem extends SaveableItem{
   }
   
   void show(float x,float y){
-    fill(200,220);
+    fill(200,240);
     noStroke();
     
     
-    circle(x,y,game.scl*0.6/2);
+    circle(x,y,game.scl*0.9/2);
     for(Shape s:shapes){  
       if(s==null)continue;
-      s.show(x,y,0.6*3/4);
+      s.show(x,y,0.9*3/4);
     }
   }
   void show(float x,float y,float r,PGraphics p){

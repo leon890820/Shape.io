@@ -21,7 +21,7 @@ class Game{
   Backpad backpad;
   BackpadUI backpadUI;
   Tutorial tutorial;
-  
+  TutorialManager tutorialManager;
   
   Game(PApplet p){
     gameLanguage=language.getJSONObject("game");
@@ -44,7 +44,7 @@ class Game{
     createInvalid();
     backpadUI=new BackpadUI(backpad,gameLanguage.getJSONObject("Backpad"));
     tutorial=new Tutorial(gameLanguage.getJSONObject("Tutorial"),"1_1_extractor.gif",p);
-    
+    tutorialManager=new TutorialManager(tutorial);
     
     
   }

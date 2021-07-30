@@ -181,9 +181,14 @@ class Tutorial extends UI {
   Gif tutorialGIF;
   JSONObject JSONOBjectLanguage;
   float lerpC=255;
-  Tutorial(JSONObject JO,String loadingString,PApplet p) {
+  String cd="res/ui/interactive_tutorial.noinline/";
+  String inform="inform1";
+  boolean enable=false;
+  PApplet p;
+  Tutorial(JSONObject JO,String loadingString,PApplet _p) {
     JSONOBjectLanguage=JO;
-    tutorialGIF=new Gif(p,"res/ui/interactive_tutorial.noinline/1_1_extractor.gif");
+    p=_p;
+    tutorialGIF=new Gif(p,cd+loadingString);
     button=new Button("",width/10+width/40,height*5/8+height/30,width/5,height*2/5,0);
     button.setBGC(color(100));
     button.setBGCT(color(0,0,0,1));
@@ -192,8 +197,19 @@ class Tutorial extends UI {
     tutorialGIF.loop();
     
   }
+  void setNewTutorial(String loading ,String _inform){
+    tutorialGIF=new Gif(p,cd+loading);
+    inform=_inform;
+    tutorialGIF.loop();
+  }
+  void setEnable(boolean b){
+    enable=b;
+  }
+  
+  
   @Override
     void show(float x, float y) {
+      if(enable) return;
       button.show();
       button.run("");
       imageMode(CENTER);
@@ -206,7 +222,7 @@ class Tutorial extends UI {
       fill(255,lerpC);
       textSize(18);
       text(JSONOBjectLanguage.getString("tutor"),width/60+width/80,height*4/8-height/30);
-      text(JSONOBjectLanguage.getString("imform1"),width/60+width/80,height*4/8);
+      text(JSONOBjectLanguage.getString(inform),width/60+width/80,height*4/8);
   }
 }
 

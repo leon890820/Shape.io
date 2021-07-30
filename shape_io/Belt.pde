@@ -267,7 +267,7 @@ class Belt extends Building {
     if (pictureType==0)image(createModeTopBeltPicture, x, y, game.getScl(), game.getScl());
     else if (pictureType==1)image(createModeRightBeltPicture, x, y, game.getScl(), game.getScl());
     else image(createModeLeftBeltPicture, x, y, game.getScl(), game.getScl());
-    for (Gate g : gates) g.show(x, y);
+    for (Gate g : gates) g.show(x, y,pictureType);
     popMatrix();
   }
   void normalShow() {

@@ -11,7 +11,7 @@ abstract class Gate{
     badImportImage=loadImage("res_raw/sprites/misc/slot_bad_arrow.png");
     transform=new Transform();
   }
-  abstract void show(float x,float y);
+  abstract void show(float x,float y,int t);
   abstract int direction();
   abstract void link(Vector2 p);
   abstract void run(ShapeItemTransport sit);
@@ -60,11 +60,11 @@ class ImportGate extends Gate{
     return -1;
   }
   
-  @Override
-  void show(float x,float y){
+  @Override  
+  void show(float x,float y,int t){
     float scl=game.getScl();
     imageMode(CENTER);
-    image(goodImportImage,x,y-scl*0.8,scl*0.5,scl*0.5);
+    image(goodImportImage,x,y+scl*0.8,scl*0.5,scl*0.5);
   }
 
 }
@@ -128,9 +128,13 @@ class ExportGate extends Gate{
     return 1;
   }
   @Override
-  void show(float x,float y){
+  void show(float x,float y,int t){
     float scl=game.getScl();
+    translate(x,y);
+    if(t==1) rotate(PI/2);      
+    else if(t==2) rotate(-PI/2);
+    translate(-x,-y);
     imageMode(CENTER);
-    image(goodImportImage,x,y+scl*0.8,scl*0.5,scl*0.5);
+    image(goodImportImage,x,y-scl*0.8,scl*0.5,scl*0.5);
   }
 }
