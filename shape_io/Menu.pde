@@ -8,8 +8,8 @@ class Menu{
   JSONObject menuLanguage;
   Menu(PApplet p){
     menuLanguage=language.getJSONObject("menu");
-    //menuSound=new SoundFile(p,"res_raw/sounds/music/menu.wav");
-    //menuSound.loop();
+    menuSound=new SoundFile(p,"res_raw/sounds/music/menu.wav");
+    menuSound.loop();
     //thread("loadMenuBackground");
     //loadMenuBackground(p);
     menuBackgroundlogo=loadImage("res/logo.png");
