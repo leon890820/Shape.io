@@ -22,6 +22,7 @@ class Game{
   BackpadUI backpadUI;
   Tutorial tutorial;
   TutorialManager tutorialManager;
+  LevelManager levelManager;
   
   Game(PApplet p){
     gameLanguage=language.getJSONObject("game");
@@ -45,6 +46,7 @@ class Game{
     backpadUI=new BackpadUI(backpad,gameLanguage.getJSONObject("Backpad"));
     tutorial=new Tutorial(gameLanguage.getJSONObject("Tutorial"),"1_1_extractor.gif",p);
     tutorialManager=new TutorialManager(tutorial);
+    levelManager=new LevelManager(gameLanguage.getJSONObject("LevelManager"),backpad);
     
     
   }
@@ -102,6 +104,7 @@ class Game{
     for(Building bb:buildings) bb.run();
     homeBuilding.run();
     homeBuilding.show();
+    levelManager.run();
     
     cursor.run(new Vector2((mouseX+cam.transform.getPosition().x-width/2)/scl*146,(mouseY+cam.transform.getPosition().y-height/2)/scl*146));    
     cam.camSpotLight();

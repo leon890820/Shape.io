@@ -58,6 +58,18 @@ class ShapeItem extends SaveableItem{
       s.show(x,y,0.9*3/4);
     }
   }
+  void show(float x,float y,float r){
+    fill(200,220);
+    noStroke();
+    
+    
+    circle(x,y,r/2*game.scl);
+    for(Shape s:shapes){  
+      if(s==null)continue;
+      s.show(x,y,r*3/4);
+    }
+  }
+  
   void show(float x,float y,float r,PGraphics p){
     p.fill(200,220);
     p.noStroke();
@@ -95,7 +107,7 @@ class CircleShape extends Shape{
   @Override
   void show(float x,float y,float r){
     fill(130,200);
-    stroke(110,200);
+    stroke(50,255);
     strokeWeight(game.scl/48);
     switch(quarter){
       case 0:        
@@ -153,7 +165,7 @@ class RectangleShape extends Shape{
   @Override
   void show(float x,float y,float r){
     fill(130,200);
-    stroke(110,200);
+    stroke(50,255);
     strokeWeight(game.scl/48);
     rectMode(CORNER);
     switch(quarter){

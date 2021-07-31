@@ -2,7 +2,7 @@
 	"menu":
 	{
 		"start":"開始遊戲",	
-		"verson":"1.0.0"
+		"verson":"1.0.2"
 	},
 	"game":
 	{
@@ -35,6 +35,23 @@
 		"TutorialManager":
 		{
 			
+		
+		},
+		"LevelManager":
+		{
+			"give":"存入",
+			"unlock":"來解鎖",
+			"finish":"你已完成所有關卡，感謝你的遊玩",
+			"level":[
+				{
+					"nextItem":"下一關"
+				},
+				{},
+				{}
+			
+			
+			]
+		
 		
 		}
 	

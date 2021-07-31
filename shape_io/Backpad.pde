@@ -18,6 +18,14 @@ class Backpad{
     
     
   }
+  
+  int getShapeItemCount(ShapeItem si){
+    for(ShapeItemCount sic:shapeItemCounts){
+      if(sic.checkShapeItemIsEqual(si)) return sic.count;
+    }
+    
+    return 0;   
+  }
 
 
 }
