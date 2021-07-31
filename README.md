@@ -36,5 +36,10 @@ Now have:
 ### v1.0.1
 
 1. Fix some bugs:
-	* Belt can show in the right direction.
+	* Now the belt shows in the right direction during building mode.
 	* New tutorials.
+	
+### 1.0.2
+
+1. Add Level1 in game.
+2. Add theme music.
