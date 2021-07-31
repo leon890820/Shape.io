@@ -56,6 +56,7 @@ class ShapeItemTransport{
   }
   void show(){
     if(shapeItem==null)return;
+    if(liteMap) return;
     Vector2 position=game.cam.transform.getPosition();
     float x=map(time.time,0,1,startTranform.getPosition().x,endTransform.getPosition().x);
     float y=map(time.time,0,1,startTranform.getPosition().y,endTransform.getPosition().y);

@@ -42,8 +42,10 @@ class LevelManager{
   
   void run(){
     checkBackpad();
-    if(!finish)normalShow();
-    else finishShow();
+    if(!liteMap){
+      if(!finish)normalShow();
+      else finishShow();
+    }
     ckeckIsTargeted();
   }
   

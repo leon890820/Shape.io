@@ -274,13 +274,31 @@ class Belt extends Building {
     Vector2 position=transform.getPosition();
     imageMode(CORNER);
     pushMatrix();
+    float scl=game.scl;
     float r=map(rotation, 0, 4, 0, 2*PI);
-    float x=position.x*game.getScl()-game.cam.transform.getPosition().x+width/2+game.scl/2;
-    float y=position.y*game.getScl()-game.cam.transform.getPosition().y+height/2+game.scl/2;
+    float x=position.x*game.getScl()-game.cam.transform.getPosition().x+width/2+scl/2;
+    float y=position.y*game.getScl()-game.cam.transform.getPosition().y+height/2+scl/2;
     translate(x, y);
     rotate(r);
     translate(-x, -y);  
-    image(topBeltPictures[(int)(time.time*speed)%topBeltImageNum], position.x*game.getScl()-game.cam.transform.getPosition().x+width/2, position.y*game.getScl()-game.cam.transform.getPosition().y+height/2, game.getScl(), game.getScl());
+    if(!liteMap)image(topBeltPictures[(int)(time.time*speed)%topBeltImageNum], position.x*game.getScl()-game.cam.transform.getPosition().x+width/2, position.y*game.getScl()-game.cam.transform.getPosition().y+height/2, game.getScl(), game.getScl());
+    else{
+      fill(150,liteLerp);
+      noStroke();
+      rectMode(CENTER);
+      if(pictureType==0){
+        rect(x,y,scl*1/3,scl);
+      }else if(pictureType==1){
+        rectMode(CORNER);
+        rect(x-scl/2+scl*1/3,y-scl/2+scl*1/3,scl*1/3,scl*2/3);
+        rect(x-scl/2+scl*1/3,y-scl/2+scl*1/3,scl*2/3,scl*1/3);
+      }else if(pictureType==2){
+        rectMode(CORNER);
+        rect(x-scl/2+scl*1/3,y-scl/2+scl*1/3,scl*1/3,scl*2/3);
+        rect(x-scl/2,y-scl/2+scl*1/3,scl*2/3,scl*1/3);
+      }
+    
+    }
     popMatrix();
 
 

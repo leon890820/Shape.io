@@ -3,6 +3,8 @@ class MineManager{
   Vector2[] vertex=new Vector2[2];
   ArrayList<Mine> mines;
   int type;
+  ShapeItem shapeItem;
+  Vector2 litePosition;
   MineManager(Vector2[] v,int t,ArrayList colliders){
     vertex=v;
     transform=new Transform();
@@ -11,6 +13,11 @@ class MineManager{
     mines=new ArrayList<Mine>();
     type=t;
     createMine(colliders);
+    int r=(int)random(mines.size());
+    if(mines.size()>0) {
+      shapeItem=mines.get(r).getShapeItem();
+      litePosition=mines.get(r).transform.getPosition();
+    }
     
   }
  
@@ -29,10 +36,16 @@ class MineManager{
     }
   }
   void show(){
-    if(!(game.cam.isInCamX(vertex[0].x*game.scl) || game.cam.isInCamX(vertex[1].x*game.scl)  || game.cam.isInCamY(vertex[0].y*game.scl) || game.cam.isInCamY(vertex[1].y*game.scl))) return;    
     for(int i=0;i<mines.size();i+=1){
       mines.get(i).show();      
     }
+    float scl=game.scl;
+    Vector2 cPosition=game.cam.transform.getPosition();
+    if(!(game.cam.isInCamX(vertex[0].x*game.scl) || game.cam.isInCamX(vertex[1].x*game.scl)  || game.cam.isInCamY(vertex[0].y*game.scl) || game.cam.isInCamY(vertex[1].y*game.scl))) return;    
+    if(liteMap){
+      if(shapeItem!=null) shapeItem.show(litePosition.x*scl-cPosition.x+width/2,litePosition.y*scl-cPosition.y+height/2,5);
+    }
+   
   }
 
 }
@@ -66,12 +79,22 @@ class Mine{
   }
   
   void show(){
-    fill(220);
-    stroke(200,200);
-    strokeWeight(game.scl/48);
-    rect(transform.position.x*game.scl-game.cam.transform.getPosition().x+width/2,transform.position.y*game.scl-game.cam.transform.getPosition().y+height/2,game.scl,game.scl);
-    //panel.show();
-    shapeItem.show();
+    
+      
+      if(!liteMap){
+        fill(220,255-liteLerp);
+        stroke(200,200);
+      }
+      else {
+        fill(240,liteLerp);
+        noStroke();
+      }
+      strokeWeight(game.scl/48);
+      rectMode(CORNER);
+      rect(transform.position.x*game.scl-game.cam.transform.getPosition().x+width/2,transform.position.y*game.scl-game.cam.transform.getPosition().y+height/2,game.scl,game.scl);
+      //panel.show();
+      shapeItem.show();
+    
     if(debugMode)collider.show();
   }
   

@@ -226,13 +226,32 @@ class Miner extends Building {
     float x=position.x*scl-gPosition.x+width/2+scl/2;
     float y=position.y*scl-gPosition.y+height/2+scl/2;
      
-    imageMode(CORNER);
-    pushMatrix();    
-    translate(x,y);
-    rotate(r);
-    translate(-x,-y);
-    image(minerPicture,position.x*scl-gPosition.x+width/2 , position.y*scl-gPosition.y+height/2, scl, scl);
-    popMatrix();
+    if(!liteMap){
+      imageMode(CORNER);
+      pushMatrix();    
+      translate(x,y);
+      rotate(r);
+      translate(-x,-y);
+      tint(255,255-liteLerp);
+      image(minerPicture,position.x*scl-gPosition.x+width/2 , position.y*scl-gPosition.y+height/2, scl, scl);
+      tint(255,255);
+      popMatrix();
+    }else{
+      rectMode(CORNER);
+      pushMatrix();    
+      translate(x,y);
+      rotate(r);
+      translate(-x,-y);
+      fill(153,53,250,liteLerp);
+      noStroke();      
+      rect(position.x*scl-gPosition.x+width/2 , position.y*scl-gPosition.y+height/2, scl, scl);
+      fill(220,liteLerp);
+      noStroke();
+      rect(position.x*scl-gPosition.x+width/2+scl*0.33 , position.y*scl-gPosition.y+height/2+scl*0.33, scl*0.33, scl*0.33);
+      popMatrix();
+    
+    
+    }
     
     
     

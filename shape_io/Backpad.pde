@@ -153,8 +153,17 @@ class HomeBuilding extends Building{
   
   void show(){
     imageMode(CENTER);
-    image(homeBuildingImage,transform.position.x-cam.transform.getPosition().x+width/2,transform.position.y-cam.transform.getPosition().y+height/2,game.getScl()*4.4,game.getScl()*4.4);
-  
+    tint(255,255-liteLerp);
+    float scl=game.scl;
+    Vector2 cPosition=game.cam.transform.getPosition();
+    if (!liteMap)image(homeBuildingImage,transform.position.x-cPosition.x+width/2,transform.position.y-cPosition.y+height/2,scl*4.4,scl*4.4);
+    else{
+      rectMode(CENTER);
+      fill(227,23,13,liteLerp);
+      noStroke();
+      rect(transform.position.x-cPosition.x+width/2,transform.position.y-cPosition.y+height/2,scl*4,scl*4);
+    }
+    tint(255);
   }
   
   void loadHomeBuildingImage(){

@@ -1,6 +1,6 @@
 import gifAnimation.*;
 import processing.sound.*;
-import processing.video.*;
+//import processing.video.*;
 import java.io.File;
 
 PFont myFont;
@@ -17,6 +17,9 @@ boolean gameMode=false;
 boolean debugMode=false;
 boolean backpadMode=false;
 boolean UIMode=false;
+boolean liteMap=false;
+
+float liteLerp=0;
 
 JSONObject language;
 
@@ -79,7 +82,7 @@ void mouseWheel(MouseEvent event) {
     float e = event.getCount();  
     float ee=(game.getScl()*pow(0.95, e));
     if(ee>200) ee=200;
-    if(ee<20) ee=20;
+    if(ee<14) ee=14;
     game.setScl(ee);
   }
 }

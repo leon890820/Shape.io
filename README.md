@@ -39,7 +39,12 @@ Now have:
 	* Now the belt shows in the right direction during building mode.
 	* New tutorials.
 	
-### 1.0.2
+### v1.0.2
 
 1. Add Level1 in game.
 2. Add theme music.
+
+### v1.0.3a
+
+1. When you zoom out the map, it will show in lite mode.
+ 

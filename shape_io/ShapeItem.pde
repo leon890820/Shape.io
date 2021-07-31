@@ -40,10 +40,12 @@ class ShapeItem extends SaveableItem{
     noStroke();
     Vector2 position=transform.getPosition();
     
-    circle(position.x*game.scl+game.scl/2-game.cam.transform.getPosition().x+width/2,position.y*game.scl+game.scl/2-game.cam.transform.getPosition().y+height/2,game.scl*1.2/2);
-    for(Shape s:shapes){  
-      if(s==null)continue;
-      s.show(position.x*game.scl+game.scl/2-game.cam.transform.getPosition().x+width/2,position.y*game.scl+game.scl/2-game.cam.transform.getPosition().y+height/2,0.9);
+    if(!liteMap){
+      circle(position.x*game.scl+game.scl/2-game.cam.transform.getPosition().x+width/2,position.y*game.scl+game.scl/2-game.cam.transform.getPosition().y+height/2,game.scl*1.2/2);
+      for(Shape s:shapes){  
+        if(s==null)continue;
+        s.show(position.x*game.scl+game.scl/2-game.cam.transform.getPosition().x+width/2,position.y*game.scl+game.scl/2-game.cam.transform.getPosition().y+height/2,0.9);
+      }
     }
   }
   
@@ -108,7 +110,10 @@ class CircleShape extends Shape{
   void show(float x,float y,float r){
     fill(130,200);
     stroke(50,255);
-    strokeWeight(game.scl/48);
+    float weight=game.scl/48;
+    if(weight<1) weight=1;
+    strokeWeight(weight);
+    rectMode(CORNER);
     switch(quarter){
       case 0:        
         arc(x,y,game.scl*r/2,game.scl*r/2,0,PI/2,PIE);
@@ -131,6 +136,7 @@ class CircleShape extends Shape{
     p.fill(130,200);
     p.stroke(110,200);
     p.strokeWeight(5);
+    p.rectMode(CORNER);
     switch(quarter){
       case 0:        
         p.arc(x,y,r/2,r/2,0,PI/2,PIE);
@@ -166,7 +172,9 @@ class RectangleShape extends Shape{
   void show(float x,float y,float r){
     fill(130,200);
     stroke(50,255);
-    strokeWeight(game.scl/48);
+     float weight=game.scl/48;
+    if(weight<1) weight=1;
+    strokeWeight(weight);
     rectMode(CORNER);
     switch(quarter){
       case 0:
