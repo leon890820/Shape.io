@@ -38,6 +38,10 @@ class Button {
   void setTextSize(int s){
     textSizes=s;
   }
+  void setPosition(PVector p){
+    position=p;
+    pp=p.copy();
+  }
   
   void show() {
     rectMode(CENTER);

@@ -58,6 +58,7 @@ void draw() {
   String txt_fps = String.format(getClass().getName()+ " [frame %d]   [fps %6.2f]", frameCount, frameRate);
   surface.setTitle(txt_fps);
   time.run();
+  
 }
 
 boolean UIBOOL(){
@@ -79,10 +80,14 @@ void mouseDragged() {
 }
 void mouseWheel(MouseEvent event) {
   if (gameMode && !UIMode) {
+    Vector2 position=game.cam.transform.getPosition();
+    Vector2 mousePosition=new Vector2(mouseX+position.x-width/2,mouseY+position.y-height/2);
     float e = event.getCount();  
-    float ee=(game.getScl()*pow(0.95, e));
+    float ee=(game.getScl()*pow(0.95, e));   
     if(ee>200) ee=200;
-    if(ee<14) ee=14;
+    if(ee<14) ee=14;    
+    Vector2 newV=Vector2.minus(position,mousePosition.scalar(1-ee/game.scl));
+    game.cam.transform.setPosition(newV);
     game.setScl(ee);
   }
 }

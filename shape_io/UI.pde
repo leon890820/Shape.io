@@ -320,9 +320,10 @@ class Tool extends UI {
   @Override
   void show(float x, float y) {    
     imageMode(CORNER);
+    button.setPosition(new PVector(x+toolbox.tHeight/2,y+toolbox.tHeight/2+liteLerp));
     button.show();
     button.run(name);
-    if(useable)image(toolImage, x, y, toolbox.tHeight, toolbox.tHeight);
-    else image(toolbox.lock,x,y,toolbox.tHeight, toolbox.tHeight);  
+    if(useable)image(toolImage, x, y+liteLerp, toolbox.tHeight, toolbox.tHeight);
+    else image(toolbox.lock,x,y+liteLerp,toolbox.tHeight, toolbox.tHeight);  
   }
 }

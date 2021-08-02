@@ -116,10 +116,11 @@ class Game {
     for (int i=buildings.size()-1; i>=0; i-=1) {
       buildings.get(i).destorySelf();
     }
-
+  
     tutorial.show(0, 0);
     if (backpadMode) backpadUI.show(0, 0);
     UIMode=UIBOOL();
+    
   }
 
   void backgroundNet() {
