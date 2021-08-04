@@ -1,23 +1,28 @@
 class Collider {
   BoxShape collider;
+  float hei;
+  float wid;
   Boolean isWork=true;
   Boolean destory=false;
   String tag="";
   Building building;
   Mine mine;
   Collider(float x, float y, float w, float h,Building b) {
+    wid=w;hei=h;
     collider=new Box(x, y, w, h);
     collider.setPosition(new Vector2(x, y));
     building=b;
     
   }
   Collider(float x, float y, float w, float h,Mine m) {
+    wid=w;hei=h;
     collider=new Box(x, y, w, h);
     collider.setPosition(new Vector2(x, y));
     mine=m;
     
   }
   Collider(float x, float y, float w, float h) {
+    wid=w;hei=h;
     collider=new Box(x, y, w, h);
     collider.setPosition(new Vector2(x, y));
 
@@ -37,6 +42,11 @@ class Collider {
     //collider.createVertex();
     //collider.createVertexDirection();
   }
+  void setNewColliderPosition(float x,float y){
+    collider=new Box(x, y, wid, hei);
+    collider.setPosition(new Vector2(x, y));
+  }
+  
   Mine getMine(){
     return mine;
   }

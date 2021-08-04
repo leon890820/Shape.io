@@ -12,6 +12,7 @@ abstract class Gate{
     transform=new Transform();
   }
   abstract void show(float x,float y,int t);
+  abstract void show(float x,float y);
   abstract int direction();
   abstract void link(Vector2 p);
   abstract void run(ShapeItemTransport sit);
@@ -28,11 +29,13 @@ abstract class Gate{
 }
 
 class ImportGate extends Gate{
-  
+  int[] bias={0,0};
   ImportGate(){
     
   }
-  
+  void setBias(int[] bi){
+    bias=bi;
+  }
   @Override
   void run(ShapeItemTransport sit){
   
@@ -48,6 +51,7 @@ class ImportGate extends Gate{
     for(Collider c:found){
       if(!c.tag.equals("Building")) continue;
       Building building=c.getBuilding();
+      
       for(Gate g:building.gates){
         if(g.direction()==1 && g.transform.getPosition().equal(p)){          
           g.importGate=this;
@@ -66,13 +70,24 @@ class ImportGate extends Gate{
     imageMode(CENTER);
     image(goodImportImage,x,y+scl*0.8,scl*0.5,scl*0.5);
   }
+  
+  @Override  
+  void show(float x,float y){
+    //Vector2 position=transform.getPosition();
+    float scl=game.getScl();
+    imageMode(CENTER);
+    image(goodImportImage,x+bias[0]*scl,y+bias[1]*scl+scl*0.8,scl*0.5,scl*0.5);
+  }
 
 }
 
 class ExportGate extends Gate{
-  
+  int[] bias={0,0};
   ExportGate(){
     importGate=null;
+  }
+  void setBias(int[] bi){
+    bias=bi;
   }
   @Override
   void run(ShapeItemTransport sit){
@@ -127,6 +142,13 @@ class ExportGate extends Gate{
   int direction(){
     return 1;
   }
+  void show(float x,float y){
+    //Vector2 position=transform.getPosition();
+    float scl=game.getScl();
+    imageMode(CENTER);
+    image(goodImportImage,x+bias[0]*scl,y+bias[1]*scl-0.8*scl,scl*0.5,scl*0.5);
+  }
+  
   @Override
   void show(float x,float y,int t){
     float scl=game.getScl();

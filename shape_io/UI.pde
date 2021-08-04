@@ -15,6 +15,8 @@ class SkillTreeUI extends UI{
 }
 
 
+
+
 class BackpadUI extends UI{
   Backpad backpad;
   PGraphics pGraph;
@@ -174,6 +176,59 @@ class Panel extends UI {
     panel.updatePixels();
   }
 }
+class BigTutorial extends UI{
+  JSONObject tutorialLanguage;
+  JSONObject tutorialLevelLanguage;
+  String c1;
+  String c2;
+  String complete;
+  String inform;
+  int LV;
+  PImage tutorialImage;
+  String path="res/ui/building_tutorials/";
+  Button button;
+  BigTutorial(JSONObject tl){
+    tutorialLanguage=tl;
+    tutorialLevelLanguage=tl.getJSONArray("level").getJSONObject(0);
+    c1=tutorialLanguage.getString("c1");
+    c2=tutorialLanguage.getString("c2");
+    complete=tutorialLanguage.getString("complete");
+    tutorialImage=loadImage(path+tutorialLevelLanguage.getString("image"));
+    LV=1;
+    button=new Button(tutorialLanguage.getString("next"),width/2,height*3/4+50,250,70,0);
+    button.setSelectable(true);
+    button.setBGC(color(0,201,87));
+    button.setBGCT(color(61,145,64));
+  
+  }
+  void show(){
+    fill(150,230);
+    rectMode(CORNER);
+    rect(0,0,width,height);
+    textSize(60);
+    textAlign(CENTER,TOP);
+    fill(255);
+    text(c1+LV+c2,width/2,height/30);
+    textSize(20);
+    fill(65,105,225);
+    text(complete,width/2,height/30+85);
+    textSize(25);
+    fill(255);
+    textAlign(CENTER,CENTER);
+    text(tutorialLevelLanguage.getString("inform"),width/2,height/4);
+    
+    imageMode(CENTER);
+    image(tutorialImage,width/2,height/2+50,300,300);
+    button.show();
+    button.run("next");
+  
+  }
+  
+  @Override
+  void show(float x,float y){
+    
+  }
+}
 
 class Tutorial extends UI {
   Button button;
@@ -246,6 +301,7 @@ class Toolbox extends UI {
   Tool trash;
   Tool[] tools=new Tool[toolNumber];
   PImage lock;
+  boolean enable=false;
 
   Toolbox() {
     panel=new Panel(height/10*toolNumber, height/10);
@@ -271,7 +327,7 @@ class Toolbox extends UI {
     stacker=new Tool("stacker",6, this,false);
     mixer=new Tool("mixer",7, this,false);
     painter=new Tool("painter",8, this,false);
-    trash=new Tool("trash",9, this,true);
+    trash=new Tool("trash",9, this,false);
     tools[0]=belt;
     tools[1]=balancer;
     tools[2]=undergroundBelt;
@@ -284,11 +340,13 @@ class Toolbox extends UI {
     tools[9]=trash;     
     lock=loadImage("res/ui/locked_building.png");
   }
-  
+  void setEnable(boolean b){
+    enable=b;
+  }
   
   @Override
   void show(float x, float y) {
-    //panel.show(x, y);
+    if(enable)return;
     for(int i=0;i<tools.length;i+=1){
       tools[i].show(x+tHeight*i, y);
     }
@@ -311,10 +369,25 @@ class Tool extends UI {
     button.setSelectable(u);
     useable=u;
   }
+  Tool(String s,float x,float y) {
+    name=s;
+    toolImage=loadImage("res/ui/icons/"+s+".png");
+
+    button=new Button("",x+32*2/3,y+32*2/3,64*2/3,64*2/3,0);
+    button.setBGC(color(220,200));
+    button.setBGCT(color(100,220));
+    button.setSelectable(true);
+    useable=true;
+  }
   void set(boolean b){
     if(useable){
       button.setSelectable(b);
     }
+  }
+  void setUseable(boolean b){
+    useable=b;
+    button.setSelectable(b);
+    
   }
   
   @Override
@@ -325,5 +398,73 @@ class Tool extends UI {
     button.run(name);
     if(useable)image(toolImage, x, y+liteLerp, toolbox.tHeight, toolbox.tHeight);
     else image(toolbox.lock,x,y+liteLerp,toolbox.tHeight, toolbox.tHeight);  
+    
+    
   }
+  
+  void show() {    
+    imageMode(CENTER);
+    float x=button.position.x;
+    float y=button.position.y;
+    button.show();
+    button.run(name);
+    image(toolImage, x, y, 64*2/3, 64*2/3); 
+  }
+}
+
+class Location extends UI{
+  PImage locationImage;
+  PImage directionImage;
+  Button locationBox;
+  String base;
+  boolean farAway;
+  Location(String b){
+    locationImage=loadImage("res_raw/sprites/misc/waypoint.png");
+    directionImage=loadImage("res_raw/sprites/misc/hub_direction_indicator.png");
+    locationBox=new Button("",width*18.5/20+30,height/10+10,80,30,0);
+    locationBox.setBGC(color(220,1));
+    locationBox.setBGCT(color(150,220));
+    locationBox.setSelectable(true);
+    base=b;
+  }
+  
+  @Override
+  void show(float x,float y){
+    
+  
+  }
+  void show(){
+    imageMode(CORNER);
+    float x=width*18.5/20;
+    float y=height/10;
+    float s=25;
+    locationBox.show();
+    locationBox.run("");
+    if(isFarAway()) {
+      Vector2 position=game.cam.transform.getPosition();
+      float angle=atan(position.y/position.x);
+      if(position.x>0) angle+=PI;
+      pushMatrix();
+      translate(x+s/2,y+s/2);
+      rotate(angle+PI/4);      
+      translate(-x-s/2,-y-s/2);
+      image(directionImage,x,y,s,s);
+      popMatrix();
+     
+    }
+    else image(locationImage,x,y,s,s);
+    textSize(20);
+    fill(0);
+    textAlign(LEFT,TOP);
+    text(base,width*18.5/20+30,height/10);
+  }
+  boolean isFarAway(){
+    Vector2 position=game.cam.transform.getPosition();
+    Vector2 rectPosition=position.divide(game.scl);
+    if(rectPosition.getLengthSquare()>128) return true;
+    else return false;
+  
+
+  }
+
 }

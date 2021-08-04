@@ -1,5 +1,5 @@
 class Belt extends Building {
-  boolean create=false;
+  
   PImage createModeTopBeltPicture;
   PImage createModeRightBeltPicture;
   PImage createModeLeftBeltPicture;
@@ -122,17 +122,10 @@ class Belt extends Building {
     game.colliders.remove(this.collider);
   }
 
-
   void setSpeed(float s) {
     speed=s;
   }
 
-
-  @Override
-    void rotateBuilding() {
-    rotation+=1;
-    rotation%=4;
-  }
   @Override
   void run(){
     
@@ -210,14 +203,11 @@ class Belt extends Building {
     //game.buildingSelect=null;
   }
 
-  @Override
-    void setCreate(boolean b) {
-    create=b;
-  }
+ 
 
   @Override
     void show(float x, float y) {
-    if (create) createModeShow(x, y);
+    if (createMode) createModeShow(x, y);
     else normalShow();
   }
   @Override

@@ -170,6 +170,14 @@ class Button {
             break;
           case "miner":
             createMiner();
+            break;
+          case "cutter":
+            createCutter();
+            break;
+            
+          
+          case "next":
+            next();
         }
         
         
@@ -177,6 +185,12 @@ class Button {
         pressed=true;
       }
     } else pressed=false;
+  }
+  void next(){
+    game.tutorial.setEnable(false);
+    game.toolbox.setEnable(false);
+    game.levelManager.tutorial=false;
+  
   }
   
   void startGame(){
@@ -189,6 +203,12 @@ class Button {
    game.setBuildingMode(true);
    game.buildingSelect=new Belt();
    game.buildingSelect.setCreate(true);
+  }
+  void createCutter(){
+    game.setBuildingMode(true);
+    game.buildingSelect=new Cutter();
+    game.buildingSelect.setCreate(true);
+  
   }
   void createMiner(){
    game.setBuildingMode(true);

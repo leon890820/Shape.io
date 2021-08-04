@@ -6,6 +6,10 @@ class Game {
   boolean buildingMode=false;
   HomeBuilding homeBuilding;
   Toolbox toolbox;
+  Tool setting;
+  Tool save;
+  Location location;
+  
   ArrayList<MineManager> mineManagers;
   ArrayList<Building> buildings;
   ArrayList<HintButton> hintButtonNormal;
@@ -24,6 +28,7 @@ class Game {
   Tutorial tutorial;
   TutorialManager tutorialManager;
   LevelManager levelManager;
+ 
 
   Game(PApplet p) {
     gameLanguage=language.getJSONObject("game");
@@ -47,7 +52,10 @@ class Game {
     backpadUI=new BackpadUI(backpad, gameLanguage.getJSONObject("Backpad"));
     tutorial=new Tutorial(gameLanguage.getJSONObject("Tutorial"), "1_1_extractor.gif", p);
     tutorialManager=new TutorialManager(tutorial);
-    levelManager=new LevelManager(gameLanguage.getJSONObject("LevelManager"), backpad);
+    levelManager=new LevelManager(gameLanguage.getJSONObject("LevelManager"), backpad,gameLanguage.getJSONObject("Tutorial"));
+    setting=new Tool("settings",width*19/20,height*1/30);
+    save=new Tool("save",width*18/20,height*1/30);
+    location=new Location(gameLanguage.getJSONObject("Location").getString("base"));
   }
   void createInvalid() {
     JSONObject invalidLanguage=gameLanguage.getJSONObject("InvalidWord");
@@ -118,11 +126,20 @@ class Game {
     }
   
     tutorial.show(0, 0);
+    toolShow();
+    
     if (backpadMode) backpadUI.show(0, 0);
+    
+    
+    
     UIMode=UIBOOL();
     
   }
-
+  void toolShow(){
+    setting.show();
+    save.show();
+    location.show();
+  }
   void backgroundNet() {
     if (!liteMap) {
       Vector2 camPosition=cam.transform.getPosition();    
@@ -141,7 +158,12 @@ class Game {
     }
   }
   void liteSetting(){
-    if (scl<30) liteMap=true;
+    if (scl<30) {
+      liteMap=true;
+      if(buildingSelect!=null)buildingSelect.removes();
+      buildingMode=false;
+      buildingSelect=null;
+    }
     else liteMap=false;
     
     if(!liteMap) {

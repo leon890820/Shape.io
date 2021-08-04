@@ -8,7 +8,9 @@ class LevelManager{
   JSONObject levelTargetLanguage;
   Backpad backpad;
   boolean finish=false;
-  LevelManager(JSONObject lml,Backpad b){
+  boolean tutorial=false;
+  BigTutorial bigTutorial;
+  LevelManager(JSONObject lml,Backpad b,JSONObject tl){
     ShapeItem si=new ShapeItem();
     si.setAllCircle();
     int tn=30;    
@@ -18,17 +20,30 @@ class LevelManager{
     levelTargetLanguage=levelManagerLanguage.getJSONArray("level").getJSONObject(0);
     nextItem=levelTargetLanguage.getString("nextItem");
     backpad=b;
+    bigTutorial=new BigTutorial(tl);
+    
   }
   
   void setNextLevel(){
+    levelTargetLanguage=levelManagerLanguage.getJSONArray("level").getJSONObject(level);
+    currentNumber=0;
     level+=1;
     switch(level){
       case 2:
-        finished();
+        int[] in={-1,1,1,-1};
+        tagetNumber=150;        
+        targetShapeItem.setShapeItem(in);
+        game.tutorial.setEnable(true);
+        game.toolbox.setEnable(true);
+        tutorial=true;
+        game.tutorial.setNewTutorial("2_1_place_cutter.gif","inform3");
+        game.toolbox.trash.setUseable(true);
+        game.toolbox.cutter.setUseable(true);
         break;
       case 3:
-      
+        finished();
         break;
+        
     
     }
   
@@ -47,6 +62,7 @@ class LevelManager{
       else finishShow();
     }
     ckeckIsTargeted();
+    if(tutorial) bigTutorial.show();
   }
   
   void ckeckIsTargeted(){
@@ -96,7 +112,7 @@ class LevelManager{
     text(levelManagerLanguage.getString("unlock"),(x+190)/146.0*scl-position.x+width/2,(y+320)/146.0*scl-position.y+height/2);
     fill(255,0,0);
     textSize(40*scl/146);
-    text(nextItem,(x+190)/146.0*scl-position.x+width/2,(y+370)/146.0*scl-position.y+height/2);
+    text(levelTargetLanguage.getString("nextItem"),(x+190)/146.0*scl-position.x+width/2,(y+370)/146.0*scl-position.y+height/2);
   
   }
 

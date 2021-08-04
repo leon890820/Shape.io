@@ -48,9 +48,14 @@ Now have:
 
 1. When you zoom out the map, it will show in lite mode.
 
-### 1.0.3b
+### v1.0.3b
 
 1. You can zoom in right position.
 2. Add home direction in the map. You won't lost direction in the world.
+
+### v1.0.4a
+
+1. When you zoom out to lite map, building mode will cancel.
+2. Add new Level and building, cutter.
 
  

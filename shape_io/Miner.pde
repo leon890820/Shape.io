@@ -3,7 +3,7 @@ class Miner extends Building {
   PImage createModeMinerPicture;
   PImage minerPicture;
   
-  boolean pressed=false;
+  
   boolean collide=false;
   Collider collider;
   
@@ -100,11 +100,7 @@ class Miner extends Building {
   void setRotation(int a){
     rotation=a;
   }
-  @Override
-  void rotateBuilding(){
-    rotation+=1;
-    rotation%=4;
-  }
+  
   
   @Override
   void show(){
@@ -173,10 +169,7 @@ class Miner extends Building {
   
   }
 
-  @Override
-    void setCreate(boolean b) {
-    createMode=b;
-  }
+  
 
   @Override
     void show(float x, float y) {

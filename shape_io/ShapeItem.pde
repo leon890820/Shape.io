@@ -9,11 +9,49 @@ class ShapeItem extends SaveableItem{
   ShapeItem clone(){
     ShapeItem si=new ShapeItem();
     for(int i=0;i<si.shapes.length;i+=1){
+      if(shapes[i]==null){
+        si.shapes[i]=null;
+        continue;
+      }
       si.shapes[i]=this.shapes[i].clone();
     }
     si.transform.position=transform.position.copy();
     return si;
   }
+  void setShapeItem(int[] in){
+    for(int i=0;i<in.length;i+=1){
+      shapes[i]=setSingle(in[i],i);
+    }
+  }
+  ShapeItem getLeft(){
+    ShapeItem si=new ShapeItem();
+    si.shapes[0]=null;
+    si.shapes[3]=null;
+    si.shapes[1]=shapes[1].clone();
+    si.shapes[2]=shapes[2].clone();
+    return si;
+  }
+  ShapeItem getRight(){
+    ShapeItem si=new ShapeItem();
+    si.shapes[1]=null;
+    si.shapes[2]=null;
+    si.shapes[0]=shapes[0].clone();
+    si.shapes[3]=shapes[3].clone();
+    return si;
+  }
+  
+  Shape setSingle(int in,int i){
+    switch(in){
+      case 0: 
+        return new CircleShape(i);
+      case 1:
+        return new RectangleShape(i);
+      default:
+        return null;
+    }
+    
+  }
+  
   void setAllCircle(){
     for(int i=0;i<shapes.length;i+=1){
       shapes[i]=new CircleShape(i);
@@ -26,7 +64,10 @@ class ShapeItem extends SaveableItem{
     }
   }
   boolean equal(ShapeItem si){
+    
     for(int i=0;i<shapes.length;i+=1){
+      if(shapes[i]==null && si.shapes[i]==null) continue;
+      else if(shapes[i]==null || si.shapes[i]==null) return false;
       if(shapes[i].getClass()!=si.shapes[i].getClass()){
         return false;
       }
