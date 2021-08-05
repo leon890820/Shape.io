@@ -58,4 +58,8 @@ Now have:
 1. When you zoom out to lite map, building mode will cancel.
 2. Add new Level and building, cutter.
 
+### v1.0.4b
+
+1. Add trash building.
+
  

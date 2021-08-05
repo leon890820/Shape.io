@@ -183,7 +183,7 @@ class Cutter extends Building{
       }
     }
     for(ShapeItemTransport sit : shapeItemTransport){
-      //sit.show();
+      sit.show();
     }
     if(shapeItemTransport[0].getTime()>=1){
       if(eg1.canTransport()) {
@@ -264,12 +264,12 @@ class Cutter extends Building{
       translate(x,y);
       rotate(r);
       translate(-x,-y);
-      fill(153,53,250,liteLerp);
+      fill(61,145,64,liteLerp);
       noStroke();      
-      rect(position.x*scl-gPosition.x+width/2 , position.y*scl-gPosition.y+height/2, scl, scl);
-      fill(220,liteLerp);
-      noStroke();
-      rect(position.x*scl-gPosition.x+width/2+scl*0.33 , position.y*scl-gPosition.y+height/2+scl*0.33, scl*0.33, scl*0.33);
+      rect(position.x*scl-gPosition.x+width/2 , position.y*scl-gPosition.y+height/2, scl*2, scl);
+      //fill(220,liteLerp);
+      //noStroke();
+      //rect(position.x*scl-gPosition.x+width/2+scl*0.33 , position.y*scl-gPosition.y+height/2+scl*0.33, scl*0.33, scl*0.33);
       popMatrix();
     
     

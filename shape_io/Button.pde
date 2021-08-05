@@ -174,6 +174,9 @@ class Button {
           case "cutter":
             createCutter();
             break;
+           case "trash":
+             createTrasher();
+              break;
             
           
           case "next":
@@ -213,6 +216,11 @@ class Button {
   void createMiner(){
    game.setBuildingMode(true);
    game.buildingSelect=new Miner();
+   game.buildingSelect.setCreate(true);
+  }
+   void createTrasher(){
+   game.setBuildingMode(true);
+   game.buildingSelect=new Trasher();
    game.buildingSelect.setCreate(true);
   }
   
