@@ -21,7 +21,7 @@ Now have:
 
 ## GamePlay 
 ![image](https://user-images.githubusercontent.com/52538091/127691840-995673e2-5de9-40c7-9ec9-74a855781b40.png)
-![gif](https://giphy.com/gifs/fMIcJRAfcFlu8eCkqI)
+![gif](https://media.giphy.com/media/fMIcJRAfcFlu8eCkqI/giphy.gif?cid=790b761178fcadf033943a37bc6ba299a84e918606181fa9&rid=giphy.gif&ct=g)
 
 ![image](https://user-images.githubusercontent.com/52538091/127692056-8851a03b-023b-419a-8ae4-62b63dd9c47d.png)
 
